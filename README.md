@@ -1,3 +1,10 @@
+----
+### This repo contains the node/express api for field-day. All to be hosted on: theAPI.link
+
+for the browser clients server, see: https://github.com/danielseehausen/ffd-browser-apps-server
+----
+
+
 # Useful Resources:
 
 - [Debugging Node Applications](https://medium.com/the-node-js-collection/debugging-node-js-with-google-chrome-4965b5f910f4)
