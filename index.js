@@ -76,21 +76,15 @@ app.get('/allGroups', (req, res) => {
 
 
 //***************************** REQ ERROR HANDLING *****************************
-// 404
-// app.use(express.static(fourOhFourPath)) // 404 assets
-// app.use((req, res) => {
-// removed this for now because rate limiter is stopping the asset transfer and no time to add in the exception for 404 stuff.
-// even understanding that, the concern is being overwhelmed with requests so its best maybe not to be sending those assets without from the same server :/
-// res.status(404).sendFile(fourOhFourPath + "404bundle.html")
-//   res.status(404).send('check endpoint')
-// })
-
-// 400 and catch all (should be 400 but cant fix atm)
 app.use((err, req, res, next) => {
-  res.status(400).send('invalid endpoint or params')
+  res.status(500).send('something went wrong!: ', err.stack)
+})
+
+app.use((req, res) => {
+  res.status(400).send('endpoint not found')
 })
 
 //*********************************** START! ***********************************
 
 app.listen(config.HTTPPORT, () => console.log(`App listening on port ${config.HTTPPORT}!`))
-console.log("Loaded with config:\n", config)
+console.log("API server loaded with config:\n", config)
