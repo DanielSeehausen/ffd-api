@@ -8,5 +8,5 @@ module.exports = {
   IDLIMIT: { low: 0, high: argv.groups ? argv.groups : 35 }, // max 40 led to overlapping identicons -> set max to 35
   LIMITWINDOW: 1000,
   LIMITCOUNT: 5,
-  ADMIN_SECRET: '0' // TODO: make secret, add to .gitignore
+  ADMIN_SECRET: '0' // TODO: make secret, add to .gitignore - rip security
 }

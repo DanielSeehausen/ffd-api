@@ -1,7 +1,3 @@
-// const path = require("path")
-// const staticPath = path.join(__dirname, '/public')
-// const fourOhFourPath = staticPath + '/four-oh-four/'
-
 const express = require('express')
 const config = require('./config')
 
@@ -17,13 +13,13 @@ const game = new Game()
 
 const app = express()
 
-/*************************** VALIDATOR ******************************/
+//*************************** VALIDATOR ****************************************
 app.use(validator)
 
-/************************** RATE LIMITER ****************************/
+//************************** RATE LIMITER **************************************
 app.use(limiter)
 
-//************************* REQ LOGGER **************************
+//************************* REQ LOGGER *****************************************
 app.use(logger)
 
 //***************************** VALID URL ROUTING ******************************
@@ -48,30 +44,33 @@ app.get('/tile', (req, res) => {
   res.send(payload)
 })
 
-// board?id=0; id coming from brwsr client config
+// board?id=0; id coming from browser client config for requestor verification
 app.get('/board', (req, res) => {
   res.send(new Buffer(game.getBoard(), 'binary'))
 })
 
 
-//******************** GROUP ROUTING **********************
-app.get('/groups', (req, res) => {
-  const group = Group.all[req.query.id]
-  res.send(JSON.stringify(group))
-})
-
-//******************** GROUP NETSTAT **********************
-app.get('/netstat', (req, res) => {
-  const netstat = Netstat.getNetstat(game)
-  res.send(JSON.stringify(netstat))
-})
-
-app.get('/allGroups', (req, res) => {
+//******************** GROUP ROUTING *******************************************
+app.get('/group', (req, res) => {
+  // TODO: once tests are implemented remove this catch all
   try {
     res.send(JSON.stringify(Object.values(Group.all)))
   } catch (e) {
     console.error("fetching all groups broke...:\n", e)
+    res.send(JSON.stringify(group))
   }
+})
+
+app.get('/group/:groupId', (req, res) => {
+    const group = Group.all[req.query.id]
+    res.send(JSON.stringify(group))
+})
+
+
+//******************** GROUP NETSTAT *******************************************
+app.get('/netstat', (req, res) => {
+  const netstat = Netstat.getNetstat(game)
+  res.send(JSON.stringify(netstat))
 })
 
 
@@ -84,7 +83,10 @@ app.use((req, res) => {
   res.status(400).send('endpoint not found')
 })
 
+
 //*********************************** START! ***********************************
 
-app.listen(config.HTTPPORT, () => console.log(`App listening on port ${config.HTTPPORT}!`))
-console.log("API server loaded with config:\n", config)
+app.listen(config.HTTPPORT, () => {
+  console.log("API server loaded with config:\n", config)
+  console.log(`App listening on port ${config.HTTPPORT}!`)
+})
