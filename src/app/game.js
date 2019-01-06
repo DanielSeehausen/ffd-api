@@ -1,7 +1,7 @@
 const config = require('../../config.js')
 const Canvas = require('./canvas.js')
 const Group = require('./group.js')
-const TimeBoard = require('./TimeBoard.js')
+const TimeBoard = require('./timeBoard.js')
 
 
 const BASECOLORS = [
