@@ -1,9 +1,9 @@
 const express = require('express')
-const config = require('../config')
+const config = require('../../config')
 
-const validator = require('./src/middleware/validator.js')
-const logger = require('./src/middleware/logger.js')
-const limiter = require('./src/middleware/rateLimiter.js')
+const validator = require('../middleware/validator.js')
+const logger = require('../middleware/logger.js')
+const limiter = require('../middleware/rateLimiter.js')
 
 const GameWorker = require('./GameWorker.js')
 
@@ -73,6 +73,5 @@ app.use((req, res) => {
 //*********************************** START! ***********************************
 
 app.listen(config.HTTPPORT, () => {
-  console.log("API server loaded with config:\n", config)
-  console.log(`App listening on port ${config.HTTPPORT}!`)
+  console.log(`worker PID: ${process.pid} listening on: ${config.HTTPPORT}!`)
 })

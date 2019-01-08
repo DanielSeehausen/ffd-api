@@ -1,6 +1,5 @@
 const config = require('../../config.js')
 const RateLimit = require('express-rate-limit')
-const Group = require('../app/group')
 
 const limiter = new RateLimit({
   windowMs: config.LIMITWINDOW, // window of limit
@@ -11,7 +10,6 @@ const limiter = new RateLimit({
   keyGenerator: (req) => ( req.query.id ),
   skip: (req) => ( req.query.id == config.ADMIN_SECRET ), // skip admin
   handler: (req, res, next) => {
-    Group.addError('Rate Limit Exceeded', parseInt(req.query.id))
     res.status(429).send(this.msg)
   }
 })

@@ -30,21 +30,21 @@ const Group = {
     }
     conn.groups.set(group.id, group)
     return newGroupData
-  }
+  },
 
   find: (id) => (
     conn.groups.get(id) || create(id)
-  )
+  ),
 
   incrementWrites: (id) => {
     const group = find(id)
     conn.groups.set(group.id, {...group, writes: group.writes + 1})
-  }
+  },
 
   incrementErrors: (id) => {
     const group = find(id)
     conn.groups.set(group.id, {...group, errors: group.errors + 1})
-  }
+  },
 
   addTime: (id, time) => {
     const group = find(id)
