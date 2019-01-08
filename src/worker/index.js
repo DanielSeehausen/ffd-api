@@ -1,6 +1,10 @@
 const express = require('express')
-const config = require('../../config')
+const cluster = require('cluster')
 
+process.on('message', msg => { console.log(msg) })
+
+const HiveMind = require('./HiveMind.js')
+const config = require('../../config')
 const validator = require('../middleware/validator.js')
 const logger = require('../middleware/logger.js')
 const limiter = require('../middleware/rateLimiter.js')
