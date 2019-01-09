@@ -1,7 +1,7 @@
-const config = require('../../config.js')
-const Canvas = require('./models/Canvas.js')
-const Group = require('./models/Group.js')
-const TimeBoard = require('./models/TimeBoard.js')
+const config = require('./../../../config.js')
+const Canvas = require('./Canvas.js')
+const Group = require('./Group.js')
+const TimeBoard = require('./TimeBoard.js')
 
 // TODO: id should correspond to core, conn should be pre-created to hold links to the various redis tables required
 class GameWorker {

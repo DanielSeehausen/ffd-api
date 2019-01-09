@@ -1,23 +1,16 @@
 const express = require('express')
 const cluster = require('cluster')
 
-process.on('message', msg => { console.log(msg) })
-
-const HiveMind = require('./HiveMind.js')
-const config = require('../../config')
+const config = require('./../../config.js')
 const validator = require('../middleware/validator.js')
 const logger = require('../middleware/logger.js')
-const limiter = require('../middleware/rateLimiter.js')
 
-const GameWorker = require('./GameWorker.js')
+const Game = require('./models/Game.js')
 
 const app = express()
 
 //*************************** VALIDATOR ****************************************
 app.use(validator)
-
-//************************** RATE LIMITER **************************************
-app.use(limiter)
 
 //************************* REQ LOGGER *****************************************
 app.use(logger)
@@ -37,24 +30,24 @@ app.post('/tile', (req, res) => { // /tile?x=x&y=y&c=c&id=ID
     hexStr: `${req.query.c}`
   }
 
-  GameWorker.setTile(tile, req.query.id)
-  GameWorker.emitTile(tile, req.query.id)
+  Game.setTile(tile, req.query.id)
+  Game.emitTile(tile, req.query.id)
   res.send(true)
 })
 
 app.get('/board', (req, res) => {
-  res.send(GameWorker.getBoard)
+  res.send(Game.getBoard)
 })
 
 
 //******************** GROUP ROUTING *******************************************
 app.get('/group', (req, res) => {
-  const groupsInfo = GameWorker.getAllGroupInfo()
+  const groupsInfo = Game.getAllGroupInfo()
   res.send(JSON.stringify(groupsInfo))
 })
 
 app.get('/group/:groupId', (req, res) => {
-  const group = GameWorker.getGroupInfo(req.query.id)
+  const group = Game.getGroupInfo(req.query.id)
   res.send(JSON.stringify(group))
 })
 
