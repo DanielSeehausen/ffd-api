@@ -12,9 +12,11 @@ const Supervisor = {
     require('./Worker.js')
   },
 
-  forkWorkers: (cores) => {
-    console.log(`\tForking ${cores} workers`)
-    for (let i = 0; i < cores; i++) cluster.fork()
+  forkWorkers: async (cores) => {
+    for (let idx = 1; idx <= cores; idx++) {
+      console.log(`\tStarting Worker ${idx}...`)
+      await cluster.fork()
+    }
   }
 
 }

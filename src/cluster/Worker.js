@@ -6,7 +6,7 @@ const config = require('../../config.js')
 const validator = require('../middleware/validator.js')
 const logger = require('../middleware/logger.js')
 
-const Game = require('../models/Game.js')
+const Game = require('../Game.js')
 
 const app = express()
 
@@ -71,5 +71,5 @@ app.use((req, res) => {
 //*********************************** START! ***********************************
 
 app.listen(config.HTTPPORT, () => {
-  console.log(`worker PID: ${cluster.worker.id} listening on: ${config.HTTPPORT}!`)
+  console.log(`worker ID: ${cluster.worker.id} listening on: ${config.HTTPPORT}!`)
 })
