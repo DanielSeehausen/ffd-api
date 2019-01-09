@@ -1,0 +1,3 @@
+ - change workers to only start listening on a message (to ensure all initialization is set up before hand)
+ - finish initialization strategy for redis
+ - plan wss emit strategy to make sure client list updated
