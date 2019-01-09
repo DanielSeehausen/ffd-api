@@ -4,6 +4,12 @@
 for the browser clients server, see: https://github.com/danielseehausen/ffd-browser-clients
 ----
 
+# Starting the server:
+  - `npm start` is an alias of `npm run startall`
+  - `npm run startall` will run on all cores
+  - `npm run startone` will run on a single core
+  - `node index.js -w #` will run using # cores (int)
+  - see the scripts in `./package.json`
 
 # Useful Resources:
 
