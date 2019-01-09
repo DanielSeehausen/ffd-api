@@ -5,7 +5,7 @@ const config = require('./../../config.js')
 const validator = require('../middleware/validator.js')
 const logger = require('../middleware/logger.js')
 
-const Game = require('./models/Game.js')
+const Game = require('./../app/models/Game.js')
 
 const app = express()
 
