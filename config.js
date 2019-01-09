@@ -1,8 +1,9 @@
 const os = require('os');
 const argv = require('minimist')(process.argv.slice(2));
-const cpus =
+const cpus = os.cpus().length
+
 module.exports = {
-  WORKERCOUNT: (argv.w <= cpus && argv.w) || os.cpus().length,
+  WORKERCOUNT: (argv.w <= cpus && argv.w) || cpus,
   ROWS: 500,
   COLUMNS: 500,
   HTTPPORT: 3000,
