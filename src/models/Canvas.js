@@ -1,4 +1,4 @@
-const hex6CharToInt32 = require('../../helpers/hex6CharToInt32.js')
+const hex6CharToInt32 = require('../helpers/hex6CharToInt32.js')
 
 const Canvas = {
 

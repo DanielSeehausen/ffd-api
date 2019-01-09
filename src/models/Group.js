@@ -1,4 +1,4 @@
-const config = require('../../../config.js')
+const config = require('../../config.js')
 
 const BASECOLORS = [
   'C0392B','E74C3C','9B59B6','008941',

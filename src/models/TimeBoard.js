@@ -1,4 +1,4 @@
-const config = require('../../../config.js')
+const config = require('../../config.js')
 
 // holds a single value of ms
 const TimeBoard = {

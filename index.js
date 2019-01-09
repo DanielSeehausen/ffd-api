@@ -6,10 +6,6 @@ const Supervisor = require('./src/cluster/Supervisor.js')
 function start() {
   console.log('\n\nServer starting with config:\n\n', config)
 
-  console.log('\n\nCreating Tables...')
-  // 1. create necessary tables
-  console.log('\t...done')
-
   console.log('\n\nStarting Workers...')
   Supervisor.forkWorkers(config.WORKERCOUNT)
 
@@ -23,7 +19,5 @@ function start() {
 if (cluster.isMaster) {
   start()
 } else {
-  Supervisor.startWorkers()
+  Supervisor.startWorker()
 }
-
-

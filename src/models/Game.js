@@ -1,4 +1,4 @@
-const config = require('./../../../config.js')
+const config = require('./../../config.js')
 const Canvas = require('./Canvas.js')
 const Group = require('./Group.js')
 const TimeBoard = require('./TimeBoard.js')

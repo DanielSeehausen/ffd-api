@@ -1,4 +1,4 @@
-const config = require('../../config.js')
+const config = require('../config.js')
 const WebSocketServer = require('ws')
 
 const wss = new WebSocketServer.Server({port: config.WSPORT})
