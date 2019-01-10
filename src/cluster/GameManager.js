@@ -1,30 +1,9 @@
-const config = require('./../config.js')
-const Canvas = require('./models/Canvas.js')
-const Group = require('./models/Group.js')
-const TimeBoard = require('./models/TimeBoard.js')
+const config = require('./../../config.js')
+const Canvas = require('../models/Canvas.js')
+const Group = require('../models/Group.js')
+const TimeBoard = require('../models/TimeBoard.js')
 
-class Game {
-
-  static initializeCanvas() {
-    console.log('\t...initializing Canvas')
-    // TODO: initializes redis Canvas
-  }
-
-  static initializeGroups() {
-    console.log('\t...initializing Groups')
-    // TODO: initialize redis Groups
-  }
-
-  static initializeTimeBoard() {
-    console.log('\t...initializing TimeBoard')
-    // TODO: initialize redis TimeBoard
-  }
-
-  static initialize() {
-    this.initializeCanvas()
-    this.initializeGroups()
-    this.initializeTimeBoard()
-  }
+class GameManager {
 
   constructor(id, wss) {
     this.id = id
@@ -66,4 +45,4 @@ class Game {
   }
 }
 
-module.exports = Game
+module.exports = GameManager

@@ -1,8 +1,16 @@
 const redis = require('redis')
+const { promisify } = require('util')
 const cluster = require('cluster')
-const conn = redis.createClient()
 
-conn.on('connect', () => { console.log(`...worker: ${cluster.worker.id} connected to Redis`) })
-conn.on('error', (err) => { console.error(`...REDIS CONN FAILED FOR ${cluster.worker.id}:\n\t${err}`) })
+const RedisConn = redis.createClient()
 
-module.exports = conn
+const workerId = cluster.worker ? cluster.worker.id : 'SUPERVISOR'
+
+RedisConn.on('connect', () => { console.log(`\t...worker: ${workerId} connected to Redis`) })
+RedisConn.on('error', (err) => { console.error(`\t...REDIS CONN FAILED FOR ${workerId}:\n\t${err}`) })
+
+RedisConn.getAsync = promisify(RedisConn.get).bind(RedisConn)
+
+RedisConn.setAsync = promisify(RedisConn.set).bind(RedisConn)
+
+module.exports = RedisConn

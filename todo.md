@@ -1,3 +1,5 @@
- - change workers to only start listening on a message (to ensure all initialization is set up before hand)
- - finish initialization strategy for redis
+ - finish initialize strategy:
+  - canvas -- make bytemap
+  - groups -- instantiate one for every group id
+  - timeboard -- make hashmap
  - plan wss emit strategy to make sure client list updated

@@ -8,7 +8,7 @@ const Supervisor = {
     }
   },
 
-  startWorker: _ => {
+  startWorker: () => {
     require('./Worker.js')
   },
 
