@@ -12,8 +12,6 @@ async function start() {
   await GameInitializer.initialize()
   console.log('...finished initializing game state')
 
-  RedisConn.getAsync('group-2').then(console.log)
-
   console.log('\n\nStarting Workers...')
   await Supervisor.forkWorkers(config.WORKERCOUNT)
   console.log('...done')
