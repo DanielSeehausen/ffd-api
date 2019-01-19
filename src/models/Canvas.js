@@ -1,11 +1,10 @@
 const hex6CharToInt32 = require('../helpers/hex6CharToInt32.js')
-const redis = require('redis')
 const RedisConn = require('../db/RedisConn.js')
 
 const Canvas = {
 
   createAsync: () => {
-    return RedisConn.setAsync('canvas', 'init canvas value')
+    RedisConn.setAsync('canvas', 'init canvas value')
   },
 
   print: async () => {

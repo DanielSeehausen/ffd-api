@@ -1,4 +1,4 @@
-const config = require('../../config.js')
+const RedisConn = require('../db/RedisConn.js')
 
 const BASECOLORS = [
   'C0392B','E74C3C','9B59B6','008941',
@@ -19,37 +19,37 @@ const schema = {
   errors: 0,
   time: 0
 }
-// TODO: all models need to be duplicated and given create methods so the main server can manage their creation
+
 const Group = {
 
   create: (id) => {
     const group = {
       ...schema,
       id,
-      color: BASECOLORS[id] || schema.color // provide random starting colors
+      color: BASECOLORS[id] || schema.color
     }
-    conn.groups.set(group.id, group)
-    return newGroupData
+    RedisConn.setGroup(group.id, group)
+    return group
   },
 
   find: (id) => (
-    conn.groups.get(id) || create(id)
+    RedisConn.getGroup(id) || create(id)
   ),
 
   incrementWrites: (id) => {
     const group = find(id)
-    conn.groups.set(group.id, {...group, writes: group.writes + 1})
+    RedisConn.setGroup(group.id, {...group, writes: group.writes + 1})
   },
 
   incrementErrors: (id) => {
     const group = find(id)
-    conn.groups.set(group.id, {...group, errors: group.errors + 1})
+    RedisConn.setGroup(group.id, {...group, errors: group.errors + 1})
   },
 
   addTime: (id, time) => {
     const group = find(id)
     const newTime = group.time + time
-    conn.groups.set(group.id, {...group, time: newTime})
+    RedisConn.setGroup(group.id, {...group, time: newTime})
   }
 }
 

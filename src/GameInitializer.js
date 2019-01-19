@@ -4,31 +4,35 @@ const Group = require('./models/Group.js')
 const TimeBoard = require('./models/TimeBoard.js')
 const RedisConn = require('./db/RedisConn.js')
 
-class GameInitializer {
+function initializeCanvas() {
+  console.log('\t...initializing Canvas')
+  Canvas.createAsync()
+}
 
-  static initializeCanvas() {
-    console.log('\t...initializing Canvas')
-    return Canvas.createAsync()
-  }
+async function initializeGroups() {
+  console.log('\t...initializing Groups')
+  return Promise.all(
+    Array(config.IDLIMIT).fill().map((_, idx) => Group.create(idx+1))
+  )
+}
 
-  static initializeGroups() {
-    console.log('\t...initializing Groups')
-    // TODO: initialize redis Groups
-  }
+function initializeTimeBoard() {
+  console.log('\t...initializing TimeBoard')
+  // TimeBoard.createAsync()
+}
 
-  static initializeTimeBoard() {
-    console.log('\t...initializing TimeBoard')
-    // TODO: initialize redis TimeBoard
-  }
+const GameInitializer = {
 
-  static initialize() {
+  initialize: () => {
     return Promise.all([
-      this.initializeCanvas(),
-      this.initializeGroups(),
-      this.initializeTimeBoard()
+      initializeCanvas(),
+      initializeGroups(),
+      initializeTimeBoard()
     ])
   }
 
 }
 
 module.exports = GameInitializer
+
+
