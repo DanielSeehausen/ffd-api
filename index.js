@@ -3,7 +3,6 @@ const cluster = require('cluster');
 const config = require('./config.js')
 const GameInitializer = require('./src/GameInitializer.js')
 const Supervisor = require('./src/cluster/Supervisor.js')
-const RedisConn = require('./src/db/RedisConn.js')
 
 async function start() {
   console.log('\n\nServer starting with config:\n\n', config)
@@ -19,9 +18,6 @@ async function start() {
   // console.log('\n\nStarting Websocket Server...')
   // 3. start websocket server
   // console.log('...done')
-  //
-  //
-  // initializer now manages supervisor role
 }
 
 if (cluster.isMaster) {

@@ -28,29 +28,30 @@ const Group = {
       id,
       color: BASECOLORS[id] || schema.color
     }
-    RedisConn.setGroup(group.id, group)
-    return group
+    return RedisConn.setGroup(group.id, group)
   },
 
   find: (id) => (
     RedisConn.getGroup(id) || create(id)
   ),
 
-  incrementWrites: (id) => {
-    const group = find(id)
-    RedisConn.setGroup(group.id, {...group, writes: group.writes + 1})
-  },
+  incrementWrites: (id) => (
+    Group.find(id).then(group => (
+      RedisConn.setGroup(group.id, {...group, writes: group.writes + 1})
+    ))
+  ),
 
-  incrementErrors: (id) => {
-    const group = find(id)
-    RedisConn.setGroup(group.id, {...group, errors: group.errors + 1})
-  },
+  incrementErrors: (id) => (
+    Group.find(id).then(group => (
+      RedisConn.setGroup(group.id, {...group, errors: group.errors + 1})
+    ))
+  ),
 
-  addTime: (id, time) => {
-    const group = find(id)
-    const newTime = group.time + time
-    RedisConn.setGroup(group.id, {...group, time: newTime})
-  }
+  addTime: (id, time) => (
+    Group.find(id).then(group => (
+      RedisConn.setGroup(group.id, {...group, time: group.time + time})
+    ))
+  )
 }
 
 module.exports = Group
