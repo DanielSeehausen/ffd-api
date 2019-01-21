@@ -1,25 +1,33 @@
+const config = require('../../config.js')
 const hex6CharToInt32 = require('../helpers/hex6CharToInt32.js')
-const RedisConn = require('../db/RedisConn.js')
+const RedisBufferConn = require('../db/RedisBufferConn.js')
 
 const Canvas = {
 
   createAsync: () => {
-    RedisConn.setAsync('canvas', 'init canvas value')
+
+    const width = config.COLUMNS
+    const height = config.ROWS
+    const bytes = height * width * 4 // alpha + rgb channels reason for *4)
+
+    const arrayBuffer = new ArrayBuffer(bytes)
+
+    const int32View = new Uint32Array(arrayBuffer)
+    int32View.fill(hex6CharToInt32('222222'))
+
+    RedisBufferConn.setAsync('canvas', Buffer.from(arrayBuffer)).then(Canvas.print)
   },
 
-  print: async () => {
-    const res = await RedisConn.getAsync('canvas')
-    console.log(res)
-  },
 
-  setTile: (x, y, int32) => {
-    RedisConn.set(`{y}-{x}`, int32)
-  },
+  setTile: (x, y, int32) => {},
 
-  getBoard: () => {
-    // TODO: implement
+  getBoard: () => RedisBufferConn.getAsync('canvas'),
+
+  print: () => {
+    RedisBufferConn.getAsync('canvas').then(b => {
+      console.log(Array.prototype.slice.call(b, 0))
+    })
   }
-
 }
 
 module.exports = Canvas

@@ -10,26 +10,28 @@ const validTile = require('./reqValidators/validTile.js')
 
 const routeValidators = {
   POST: {
-    '/tile': [validID, validTile, validColor],
-    __noSuchMethod__: [() => true] // might be 404 but that is handled normally.
+    '/tile': [validID, validTile, validColor]
   },
   GET: {
     '/board': [validID],
-    '/groups': [validID],
+    '/group': [validID],
     '/tile': [validTile, validID],
-    '/allGroups': [() => true],
-    '/netstat': [() => true],
-    __noSuchMethod__: [() => true] // might be 404 but that is handled normally.
+    '/netstat': [],
   }
 }
 
 function validRequest(req, res, next) {
-  const validators = routeValidators[req.method][req.path]
-  if (!validators.every(validator => validator(req))) {
-    const invalids = validators.filter(validator => !validator(req)) // finds the validation methods that failed
-    const groupId = req.query.id
+  // TODO: remove these logs before prod
+  console.log(req.method, req.path)
+  const validators = routeValidators[req.method][req.path] || []
+  const invalids = validators.filter(validator => !validator(req))
+
+  if (invalids.length > 0) {
+    console.error('invalids:')
+    invalids.forEach(x => console.error(x.name))
     return res.status(422).send('Bad Request! Check your id, coordinates, color value, etc.')
   }
+
   next()
 }
 

@@ -2,7 +2,7 @@ const redis = require('redis')
 const { promisify } = require('util')
 const cluster = require('cluster')
 
-const RedisConn = redis.createClient()
+const RedisConn = redis.createClient({'detect_buffers': true})
 
 const workerId = cluster.worker ? `worker: ${cluster.worker.id}` : 'STARTUP'
 

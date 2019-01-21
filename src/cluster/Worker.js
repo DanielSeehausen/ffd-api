@@ -5,7 +5,7 @@ const config = require('../../config.js')
 const validator = require('../middleware/validator.js')
 const logger = require('../middleware/logger.js')
 
-const Game = require('./GameManager.js')
+const GameManager = require('./GameManager.js')
 
 const app = express()
 
@@ -30,25 +30,25 @@ app.post('/tile', (req, res) => { // /tile?x=x&y=y&c=c&id=ID
     hexStr: `${req.query.c}`
   }
 
-  Game.setTile(tile, req.query.id)
-  Game.emitTile(tile, req.query.id)
-  res.send(true)
+  GameManager.setTile(tile, req.query.id)
+  // GameManager.emitTile(tile, req.query.id)
+  res.status(200).send(true)
 })
 
 app.get('/board', (req, res) => {
-  res.send(Game.getBoard)
+  res.status(200).send(GameManager.getBoard)
 })
 
 
 //******************** GROUP ROUTING *******************************************
 app.get('/group', (req, res) => {
-  const groupsInfo = Game.getAllGroupInfo()
-  res.send(JSON.stringify(groupsInfo))
+  const groupsInfo = GameManager.getAllGroup()
+  res.status(200).send(JSON.stringify(groupsInfo))
 })
 
 app.get('/group/:groupId', (req, res) => {
-  const group = Game.getGroupInfo(req.query.id)
-  res.send(JSON.stringify(group))
+  const group = GameManager.getGroupInfo(req.query.id)
+  res.status(200).send(JSON.stringify(group))
 })
 
 
@@ -59,7 +59,8 @@ app.get('/netstat', (req, res) => {
 
 //***************************** REQ ERROR HANDLING *****************************
 app.use((err, req, res, next) => {
-  res.status(500).send('something went wrong!: ', err.stack)
+  console.log(err) // TODO: remove me
+  res.status(500).send(`something went wrong!: ${err.stack}`)
 })
 
 app.use((req, res) => {
