@@ -6,7 +6,7 @@ const RedisConn = require('./db/RedisConn.js')
 
 function initializeCanvas() {
   console.log('\t...initializing Canvas')
-  Canvas.createAsync()
+  Canvas.create()
 }
 
 async function initializeGroups() {
