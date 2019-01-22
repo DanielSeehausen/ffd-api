@@ -1,5 +1,0 @@
- - finish initialize strategy:
-  - canvas -- make bytemap
-  - groups -- instantiate one for every group id
-  - timeboard -- make hashmap
- - plan wss emit strategy to make sure client list updated

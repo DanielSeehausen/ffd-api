@@ -1,3 +1,5 @@
+// TODO: this file should not be here. maybe top level in src a better place
+
 const config = require('./../../config.js')
 const Canvas = require('../models/Canvas.js')
 const Group = require('../models/Group.js')
@@ -18,16 +20,12 @@ function coordToByteIdx(x, y) {
 const GameManager = {
 
   setTile: ({x, y, hexStr}, groupId) => {
-    const idx = coordToByteIdx(x, y)
-    const int32 = hex6CharToInt32(hexStr)
-
-    Canvas.setTile(x, y, int32)
-
+    Canvas.setTile(x, y, hexStr)
     Group.incrementWrites(groupId)
 
-    if (TimeBoard.get(x, y)) {
-      this.updateTileTime(x, y, groupId)
-    }
+    // if (TimeBoard.get(x, y)) {
+    //   updateTileTime(x, y, groupId)
+    // }
   },
 
   getAllGroupInfo: () => {
@@ -38,9 +36,7 @@ const GameManager = {
     // wss.emit(x, y, hexStr)
   },
 
-  getBoard: () => {
-    // not sure how to do this yet with redis-ml
-  }
+  getCanvas: () => Canvas.getCanvas()
 }
 
 module.exports = GameManager

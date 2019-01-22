@@ -1,4 +1,4 @@
-const cluster = require('cluster');
+const cluster = require('cluster')
 
 const config = require('./config.js')
 const GameInitializer = require('./src/GameInitializer.js')
@@ -17,11 +17,17 @@ async function start() {
 
   // console.log('\n\nStarting Websocket Server...')
   // 3. start websocket server
-  // console.log('...done')
 }
 
 if (cluster.isMaster) {
   start()
 } else {
   Supervisor.startWorker()
+  // test()
 }
+
+function test() {
+  c.print()
+  c.setTile(0, 1, 'ffffff').then(c.print)
+}
+
