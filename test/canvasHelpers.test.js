@@ -1,5 +1,5 @@
-const reverse8CharHexStr = require('../src/app/canvasHelpers/reverse8CharHexStr.js')
-const hex6CharToInt32 = require('../src/app/canvasHelpers/hex6CharToInt32.js')
+const reverse8CharHexStr = require('../src/helpers/reverse8CharHexStr.js')
+const hex6CharToInt32 = require('../src/helpers/hex6CharToInt32.js')
 
 test('reverse8CharHexStr reverses an 8 character hex str', () => {
   const str = '213141FF'
