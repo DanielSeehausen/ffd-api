@@ -35,8 +35,9 @@ app.post('/tile', (req, res) => { // /tile?x=x&y=y&c=c&id=ID
   res.status(200).send(true)
 })
 
-app.get('/board', (req, res) => {
-  res.status(200).send(GameManager.getBoard)
+app.get('/canvas', async (req, res) => {
+  const canvas = await GameManager.getCanvas()
+  res.status(200).send(Buffer.from(canvas))
 })
 
 

@@ -8,6 +8,7 @@
     "startall": "node index.js",
     "startone": "node index.js -w 1",
     "test": "jest",
+    "testCanvas": "ruby apiTest/canvas.test.rb",
     "watch": "supervisor -n index.js --no-restart-on error --inspect index.js"
   },
   "repository": {
@@ -34,10 +35,15 @@
     "express-rate-limit": "^2.11.0",
     "express-ws": "^3.0.0",
     "redis": "^2.8.0",
+    "supertest": "^3.4.2",
     "supervisor": "^0.12.0",
     "ws": "^5.2.2"
   },
   "devDependencies": {
-    "jest": "^24.1.0"
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
+    "node-fetch": "^2.3.0"
   }
 }

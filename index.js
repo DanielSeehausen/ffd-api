@@ -14,16 +14,12 @@ async function start() {
   console.log('\n\nStarting Workers...')
   await Supervisor.forkWorkers(config.WORKERCOUNT)
   console.log('...done')
-
-  // console.log('\n\nStarting Websocket Server...')
-  // 3. start websocket server
 }
 
 if (cluster.isMaster) {
   start()
 } else {
   Supervisor.startWorker()
-  // test()
 }
 
 function test() {

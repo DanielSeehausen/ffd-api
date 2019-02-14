@@ -13,7 +13,7 @@ const routeValidators = {
     '/tile': [validID, validTile, validColor]
   },
   GET: {
-    '/board': [validID],
+    '/canvas': [validID],
     '/group': [validID],
     '/tile': [validTile, validID],
     '/netstat': [],
