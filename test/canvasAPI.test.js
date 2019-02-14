@@ -1,5 +1,13 @@
-const config = require('./testConfig.js')
+const config = require('../config.js')
 
+config.ROWS = 2
+config.COLUMNS = 2
+config.IDLIMIT = 2
+
+// const Game = require('../src/app/game.js')
+// const Canvas = require('../src/app/canvas.js')
+// const hex6CharToInt32 = require('../src/app/canvasHelpers/hex6CharToInt32.js')
+//
 // const game = new Game()
 //
 // test('creates a canvas', () => {
