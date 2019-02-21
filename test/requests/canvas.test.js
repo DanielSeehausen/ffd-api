@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
 
 const canvasEndpoint = 'http://localhost:3000/canvas?id=0'
-const setTileEndpoint = 'http://localhost:3000/canvas?id=0'
 
 const fetchCanvas = () => fetch(canvasEndpoint).then(res => res.arrayBuffer())
 
@@ -29,7 +28,14 @@ describe('canvas', () => {
     alphaChannels.forEach(value => {expect(value).toBe(255)})
   })
 
+
   describe('setting tiles', () => {
+
+    const setTileEndpoint = 'http://localhost:3000/tile?id=0'
+    function setTile(x, y) {
+      const endpoint = `${setTileEndpoint}&x=${x}&y=${y}`
+      return fetch(endpoint).then(res => res)
+    }
 
     test('returns an array buffer of the appropriate size', async () => {
       expect(false).toBe(true)
