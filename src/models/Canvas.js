@@ -26,7 +26,7 @@ const Canvas = {
   },
 
 
-  setTile: (y, x, hexColorStr) => {
+  setTile: (x, y, hexColorStr) => {
     const int32Value = hex6CharToInt32(hexColorStr)
     const offset = coordToByteIndex(y, x)
     console.log(int32Value, offset)
