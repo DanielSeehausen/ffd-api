@@ -46,6 +46,7 @@ describe('GET /canvas', () => {
       const arrayBuffer = await fetchCanvas()
       const channelArray = new Uint8ClampedArray(arrayBuffer)
       const tileIndex = (testConfig.COLUMNS * y + x) * 4
+
       return channelArray.slice(tileIndex, tileIndex + 4)
     }
 
@@ -56,7 +57,6 @@ describe('GET /canvas', () => {
     })
 
     test('succesfully sets and resets the first tile', async () => {
-      // TODO: failing because it is overwriting the alpha channel
       await setTile(0, 0, 'FFFFFF')
       const tileChannelsWhite = await getTile(0, 0)
 
@@ -69,7 +69,6 @@ describe('GET /canvas', () => {
     })
 
     test('succesfully sets and resets the second tile', async () => {
-      // TODO: failing because it is overwriting the alpha channel
       await setTile(1, 0, 'FFFFFF')
       const tileChannelsWhite = await getTile(1, 0)
 
@@ -81,6 +80,17 @@ describe('GET /canvas', () => {
       expect(tileChannelsBlack).toEqual(new Uint8ClampedArray([0, 0, 0, 255]))
     })
 
+    test('succesfully sets colors', async () => {
+      await setTile(1, 0, 'FF0000')
+      const tileChannelsRed = await getTile(1, 0)
+
+      expect(tileChannelsRed).toEqual(new Uint8ClampedArray([255, 0, 0, 255]))
+
+      await setTile(1, 0, '00FFFF')
+      const tileChannelsCyan = await getTile(1, 0)
+
+      expect(tileChannelsCyan).toEqual(new Uint8ClampedArray([0, 255, 255, 255]))
+    })
   })
 
 })
