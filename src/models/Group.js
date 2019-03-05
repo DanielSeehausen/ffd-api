@@ -32,8 +32,13 @@ const Group = {
   },
 
   find: (id) => (
-    RedisConn.getGroup(id) || create(id)
+    RedisConn.getGroup(id)
   ),
+
+  findOrCreate: async (id) => {
+    const group = await Group.find(id)
+    return group || Group.create(id)
+  },
 
   incrementWrites: (id) => (
     Group.find(id).then(group => (

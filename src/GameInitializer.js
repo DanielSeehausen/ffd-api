@@ -11,9 +11,8 @@ function initializeCanvas() {
 
 async function initializeGroups() {
   console.log('\t...initializing Groups')
-  // TODO: this is on find right now instead of create to stop from overwriting. this needs to be flexible for each option in thhe future.
   return Promise.all(
-    Array(config.IDLIMIT).fill().map((_, idx) => Group.find(idx+1))
+    Array(config.IDLIMIT).fill().map((_, idx) => Group.findOrCreate(idx+1))
   )
 }
 
