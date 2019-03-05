@@ -9,7 +9,7 @@ const Supervisor = {
   },
 
   startWorker: () => {
-    require('./Worker.js')
+    require('./worker/Router.js')
   },
 
   forkWorkers: async (cores) => {

@@ -1,19 +1,19 @@
 const express = require('express')
 const cluster = require('cluster')
 
-const config = require('../../config.js')
-const validator = require('../middleware/validator.js')
-const logger = require('../middleware/logger.js')
+const config = require('../../../config.js')
+const validateRequest = require('../../middleware/validateRequest.js')
+const logger = require('../../middleware/logger.js')
 
 const GameManager = require('./GameManager.js')
 
 const app = express()
 
 //*************************** VALIDATOR ****************************************
-app.use(validator)
+app.use(validateRequest)
 
 //************************* REQ LOGGER *****************************************
-app.use(logger)
+// app.use(logger)
 
 //***************************** VALID URL ROUTING ******************************
 app.use((req, res, next) => {
@@ -31,7 +31,6 @@ app.post('/tile', (req, res) => { // /tile?x=x&y=y&c=c&id=ID
   }
 
   GameManager.setTile(tile, req.query.id)
-  // GameManager.emitTile(tile, req.query.id)
   res.status(200).send(true)
 })
 
@@ -60,7 +59,6 @@ app.get('/netstat', (req, res) => {
 
 //***************************** REQ ERROR HANDLING *****************************
 app.use((err, req, res, next) => {
-  console.log(err) // TODO: remove me
   res.status(500).send(`something went wrong!: ${err.stack}`)
 })
 

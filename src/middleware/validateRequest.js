@@ -20,19 +20,14 @@ const routeValidators = {
   }
 }
 
-function validRequest(req, res, next) {
-  // TODO: remove these logs before prod
-  console.log(req.method, req.path)
+function validateRequest(req, res, next) {
   const validators = routeValidators[req.method][req.path] || []
   const invalids = validators.filter(validator => !validator(req))
 
-  if (invalids.length > 0) {
-    console.error('invalids:')
-    invalids.forEach(x => console.error(x.name))
+  if (invalids.length > 0)
     return res.status(422).send('Bad Request! Check your id, coordinates, color value, etc.')
-  }
 
   next()
 }
 
-module.exports = validRequest
+module.exports = validateRequest
