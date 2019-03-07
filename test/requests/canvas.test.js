@@ -11,21 +11,32 @@ const fetchCanvas = () => fetch(canvasEndpoint).then(res => res.arrayBuffer())
 
 
 describe('GET /canvas', () => {
-
+  
   test('returns a 200 response', async () => {
     const res = await fetch(canvasEndpoint)
-
+    
     expect(res.status).toBe(200)
   })
-
-  test.skip('returns a 422 response when no id argument is provided, with a useful human readable message', async () => {
+  
+  test('returns a 422 response when no id argument is provided, with a useful human readable message', async () => {
+    const fetchCanvasEndpoint = () => fetch('http://localhost:3000/canvas').then(res => res)
+    
+    const res = await fetchCanvasEndpoint()
+    console.log(res.status);
+    
     //TODO: implement
-    expect(false).tobe(true)
+
+    expect(res.status).toBe(422)
   })
 
-  test.skip('returns a 401 response when an invalid id argument is provided for a group that does not exist, with a useful human readable message', async () => {
+  test('returns a 422 response when an invalid id argument is provided for a group that does not exist, with a useful human readable message', async () => {
     //TODO: implement
-    expect(false).tobe(true)
+    const fetchCanvasEndpoint = () => fetch('http://localhost:3000/canvas?id=%2D1').then(res => res)
+
+    const res = await fetchCanvasEndpoint()
+    console.log(res);
+
+    expect(res.status).toBe(422)
   })
 
   test('returns an array buffer of the appropriate size', async () => {
