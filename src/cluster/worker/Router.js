@@ -34,7 +34,6 @@ app.post('/tile', (req, res) => { // /tile?x=x&y=y&c=c&id=ID
 })
 
 app.get('/canvas', async (req, res) => {
-  console.log(req.query.id)
   const canvas = await GameManager.getCanvas()
   res.status(200).send(Buffer.from(canvas))
 })

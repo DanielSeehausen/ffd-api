@@ -20,12 +20,21 @@ const routeValidators = {
   }
 }
 
+const getInvalids = (req, validators) => (
+  validators.map(validator => {
+    const result = validator(req)
+    if (result !== true) return result
+  })
+)
+
 function validateRequest(req, res, next) {
   const validators = routeValidators[req.method][req.path] || []
-  const invalids = validators.filter(validator => !validator(req))
+  const invalids = getInvalids(req, validators).filter(result => result !== undefined)
 
-  if (invalids.length > 0)
-    return res.status(422).send('Bad Request! Check your id, coordinates, color value, etc.')
+  if (invalids.length > 0) {
+    const [ status, msg ] = invalids[0]
+    return res.status(status).send(msg)
+  }
 
   next()
 }
