@@ -51,8 +51,9 @@ app.get('/group/:groupId', (req, res) => {
 })
 
 
-//******************** GROUP NETSTAT *******************************************
-app.get('/netstat', (req, res) => {
+//******************** GAMECONFIG *******************************************
+app.get('/config', (req, res) => {
+  res.status(200).send(JSON.stringify(config))
 })
 
 

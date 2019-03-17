@@ -1,11 +1,10 @@
 // make tests grab from server's config
 // TODO: derive config from config endpoint, instead of hard coding
+const config = require('../../config.js')
 
 const fetch = require('node-fetch')
 
-const config = require('../../config.js')
-const testEndpoint = require('../../config.js').TESTENDPOINT
-const canvasEndpoint = testEndpoint + '/canvas?id=0'
+const canvasEndpoint = 'http://localhost:3000/canvas?id=0'
 
 function fetchCanvas() {
   return fetch(canvasEndpoint).then(res => res.arrayBuffer())

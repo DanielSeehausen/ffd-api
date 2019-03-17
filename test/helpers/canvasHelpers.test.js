@@ -8,7 +8,5 @@ test('reverse8CharHexStr reverses an 8 character hex str', () => {
 
 test('hex6CharToInt32 reverses a 6 char hex str and adds an alpha value in the process', () => {
   const str = '010203'
-  const reversedWithAlpha = reverse8CharHexStr('010203FF')
-  const int32 = parseInt(reversedWithAlpha, 16)
-  expect(hex6CharToInt32(str)).toBe(int32)
+  expect(hex6CharToInt32(str)).toBe(16909311)
 })

@@ -9,5 +9,6 @@ module.exports = {
   HTTPPORT: 3000,
   WSPORT: 8080,
   IDLIMIT: argv.g || argv.groups || 10,
+  TESTENDPOINT: 'http://localhost:3000',
   ADMIN_SECRET: '0' // TODO: make secret, add to .gitignore - rip security
 }

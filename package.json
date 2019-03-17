@@ -8,8 +8,7 @@
     "startall": "node index.js",
     "startone": "node index.js -w 1",
     "test": "jest",
-    "testCanvas": "ruby apiTest/canvas.test.rb",
-    "watch": "supervisor -n index.js --no-restart-on error --inspect index.js"
+    "watch": "supervisor -- index.js -w 1"
   },
   "repository": {
     "type": "git",
