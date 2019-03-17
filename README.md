@@ -1,3 +1,6 @@
+to run end to end tests, set the test endpoint (wherever the server may be running) in `config.js`
+the tests will get the config the game was initialized with from the server then
+
 ----
 ### This repo contains the node/express api for field-day. All to be hosted on: theAPI.link
 

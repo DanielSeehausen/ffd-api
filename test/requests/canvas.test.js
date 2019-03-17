@@ -1,16 +1,16 @@
-// make tests grab from server's config
-// TODO: derive config from config endpoint, instead of hard coding
-
 const fetch = require('node-fetch')
 
-const config = require('../../config.js')
 const testEndpoint = require('../../config.js').TESTENDPOINT
 const canvasEndpoint = testEndpoint + '/canvas?id=0'
+
+let config;
+beforeAll(async () => {
+  config = await fetch(testEndpoint + '/config').then(res => res.json())
+})
 
 function fetchCanvas() {
   return fetch(canvasEndpoint).then(res => res.arrayBuffer())
 }
-
 
 describe('GET /canvas', () => {
 

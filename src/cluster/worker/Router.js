@@ -40,13 +40,13 @@ app.get('/canvas', async (req, res) => {
 
 
 //******************** GROUP ROUTING *******************************************
-app.get('/group', (req, res) => {
-  const groupsInfo = GameManager.getAllGroup()
+app.get('/group', async (req, res) => {
+  const groupsInfo = await GameManager.getAllGroups()
   res.status(200).send(JSON.stringify(groupsInfo))
 })
 
-app.get('/group/:groupId', (req, res) => {
-  const group = GameManager.getGroupInfo(req.query.id)
+app.get('/group/:groupId', async (req, res) => {
+  const group = await GameManager.getGroup(req.params.groupId)
   res.status(200).send(JSON.stringify(group))
 })
 

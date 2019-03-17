@@ -10,14 +10,14 @@ describe('GET /config', () => {
     expect(res.status).toBe(200)
   })
 
-  describe('returns an accurate payload', () => {
+  describe('JSON payload', () => {
 
     let config;
     beforeAll(async () => {
       config = await fetch(configEndpoint).then(res => res.json())
     })
 
-    test('returns an object as json', () => {
+    test('returns an object as JSON', () => {
       expect(typeof config).toBe('object')
     })
 
