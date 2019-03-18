@@ -1,6 +1,6 @@
-const config = require('./../../../config.js')
-const Canvas = require('./../../models/Canvas.js')
-const Group = require('./../../models/Group.js')
+const config = require('./../config.js')
+const Canvas = require('./models/Canvas.js')
+const Group = require('./models/Group.js')
 
 const GameManager = {
 

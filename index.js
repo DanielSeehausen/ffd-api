@@ -2,7 +2,7 @@ const cluster = require('cluster')
 
 const config = require('./config.js')
 const GameInitializer = require('./src/GameInitializer.js')
-const Supervisor = require('./src/cluster/Supervisor.js')
+const Supervisor = require('./src/Supervisor.js')
 
 async function start() {
   console.log('\n\nServer starting with config:\n\n', config)

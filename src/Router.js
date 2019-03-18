@@ -1,9 +1,9 @@
 const express = require('express')
 const cluster = require('cluster')
 
-const config = require('../../../config.js')
-const validateRequest = require('../../middleware/validateRequest.js')
-const logger = require('../../middleware/logger.js')
+const config = require('../config.js')
+const validateRequest = require('./middleware/validateRequest.js')
+const logger = require('./middleware/logger.js')
 const GameManager = require('./GameManager.js')
 
 const app = express()
