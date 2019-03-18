@@ -10,7 +10,7 @@ function initializeCanvas() {
 }
 
 async function initializeGroups() {
-  console.log('\t...initializing Groups')
+  console.log('\t...initializing or finding Groups')
   return Promise.all(
     Array(config.IDLIMIT).fill().map((_, idx) => Group.findOrCreate(idx+1))
   )
@@ -23,13 +23,13 @@ function initializeTimeBoard() {
 
 const GameInitializer = {
 
-  initialize: () => {
-    return Promise.all([
+  initialize: () => (
+    Promise.all([
       initializeCanvas(),
       initializeGroups(),
       initializeTimeBoard()
     ])
-  }
+  )
 
 }
 

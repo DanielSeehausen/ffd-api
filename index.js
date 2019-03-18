@@ -16,14 +16,5 @@ async function start() {
   console.log('...done')
 }
 
-if (cluster.isMaster) {
-  start()
-} else {
-  Supervisor.startWorker()
-}
-
-function test() {
-  c.print()
-  c.setTile(0, 1, 'ffffff').then(c.print)
-}
+cluster.isMaster ? start() : Supervisor.startWorker()
 
